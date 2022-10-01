@@ -1,3 +1,4 @@
+from tkinter import N
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Course, Videos
@@ -36,7 +37,7 @@ def api_register(request):
         if form.is_valid():
             try:
                 form.save()
-                data['status'] = 200
+                data['status'] = 201
                 #bot
                 fullname = form.data.get("full_name")
                 age = form.data.get("age")
@@ -47,8 +48,8 @@ def api_register(request):
                 bot.send_message(-1001383923135, f"""Yangi o'quvchi\n\nIsm-familyasi:\n{fullname}\n\nYoshi:\n{age}\n\nTelefo'n raqami:\n+{phonenumber}\n\nTanlagan kursi:\n{course}\n\nQo'shimcha habar:\n{message}""")
                 #/bot
             except Exception as e:
-                data['error'] = e
+                data['status'] = None
         else:
-            data['status'] = 500
+            data['status'] = 400
     return JsonResponse(data, safe=False)
 

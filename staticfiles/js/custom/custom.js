@@ -81,11 +81,12 @@ async function sendForm(e){
           body: formData
     })
     let responseObj = await response.json()
-    if(responseObj.status == 200){
-        alert.querySelector(".alert_text").innerHTML = "<p>Muvofaqiyatlik yuborildi siz bialn aloqaga chiqamiz!!!</p>"
-    }
-    else if(responseObj.status == 500){
+    console.log(responseObj)
+    if(responseObj.status == 400){
         alert.querySelector(".alert_text").innerHTML = "<p>Maydonlarni to'ldirishda hatolik bor qayta urinib ko'rin!!!</p>"
+    }
+    if(responseObj.status == 201){
+        alert.querySelector(".alert_text").innerHTML = "<p>Muvofaqiyatlik yuborildi siz bialn aloqaga chiqamiz!!!</p>"
     }
     else{
         alert.querySelector(".alert_text").innerHTML = "<p>Nimadur hato ketdi iltimos boshqatdan urinib ko'rin</p>"
